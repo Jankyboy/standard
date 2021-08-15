@@ -13,10 +13,15 @@
   <a href="https://www.npmjs.com/package/standard"><img src="https://img.shields.io/npm/v/standard.svg" alt="npm version"></a>
 </p>
 
+<h5 align="center">
+  Sponsored by&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://speakeasy.co/?utm_source=standardjs.com&utm_medium=sponsorship&utm_campaign=standard"><img src="https://speakeasy.co/logo-text.png" alt="Speakeasy" height=50 valign="middle"></a>
+</h5>
+
 <p align="center">
   <a href="/docs/README-en.md">English</a> •
   <a href="/docs/README-esla.md">Español (Latinoamérica)</a> •
   <a href="/docs/README-fr.md">Français</a> •
+  <a href="/docs/README-id.md">Bahasa Indonesia</a> •
   <a href="/docs/README-iteu.md">Italiano (Italian)</a> •
   <a href="/docs/README-ja.md">日本語 (Japanese)</a> •
   <a href="/docs/README-kokr.md">한국어 (Korean)</a> •
@@ -24,8 +29,6 @@
   <a href="/docs/README-zhcn.md">简体中文 (Simplified Chinese)</a> •
   <a href="/docs/README-zhtw.md">繁體中文 (Taiwanese Mandarin)</a>
 </p>
-
-<br>
 
 ## Guía de estilos JavaScript, con linter y corrección automática de código
 
@@ -229,7 +232,7 @@ Adoptar estilos `standard` significa clasificar la importancia de la claridad de
 |---|---|---|---|
 
 
-| Your logo here | Your logo here | Your logo here | Your logo here |
+| [<img width=190 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/jublia.png>](https://jublia.com/) | Your logo here | Your logo here | Your logo here |
 |---|---|---|---|
 
 
@@ -268,14 +271,14 @@ instale **[standardjs-snippets][atom-3]**.
 
 #### Visual Studio Code
 
-Instale **[vscode-standardjs][vscode-1]**. (Incluye soporte para formateo automático.)
+Instale **[vscode-standard][vscode-1]**. (Incluye soporte para formateo automático.)
 
 Para snippets JS, instale: **[vscode-standardjs-snippets][vscode-2]**.
 Para snippets React, instale **[vscode-react-standard][vscode-3]**.
 
-[vscode-1]: https://marketplace.visualstudio.com/items/chenxsan.vscode-standardjs
+[vscode-1]: https://marketplace.visualstudio.com/items?itemName=standard.vscode-standard
 [vscode-2]: https://marketplace.visualstudio.com/items?itemName=capaj.vscode-standardjs-snippets
-[vscode-3]: https://marketplace.visualstudio.com/items/TimonVS.ReactSnippetsStandard
+[vscode-3]: https://marketplace.visualstudio.com/items?itemName=TimonVS.ReactSnippetsStandard
 
 #### Vim
 
@@ -312,7 +315,7 @@ Busque el registro de extension para **["Standard Code Style"][brackets-1]**.
 
 WebStorm [recientemente anuncio soporte nativo](https://blog.jetbrains.com/webstorm/2017/01/webstorm-2017-1-eap-171-2272/) para `standard` directamente en el IDE.
 
-Si aun prefieres configurar `standard` manualmente [sigue esta guía](webstorm-2). Esto se aplica a todos los productos de JetBrains, incluyendo PhpStorm, IntelliJ, RubyMine y etc.
+Si aun prefieres configurar `standard` manualmente [sigue esta guía][webstorm-2]. Esto se aplica a todos los productos de JetBrains, incluyendo PhpStorm, IntelliJ, RubyMine y etc.
 
 [webstorm-1]: https://www.jetbrains.com/webstorm/
 [webstorm-2]: webstorm.md
@@ -456,10 +459,10 @@ de las propuestas que estan en "Stage 4" del proceso de propuestas.
 
 Para soportar características experimentales del lenguaje, `standard` soporta especificar un parser JS customizado. Antes de que uses un parser customizado, considera si la complejidad agregada vale la pena.
 
-Para usar un parser customizado, instálalo desde npm (ejemplo: `npm install babel-eslint`) y ejecuta esto:
+Para usar un parser customizado, instálalo desde npm (ejemplo: `npm install @babel/eslint-parser`) y ejecuta esto:
 
 ```bash
-$ standard --parser babel-eslint
+$ standard --parser @babel/eslint-parser
 ```
 
 O, agrega esto a `package.json`:
@@ -467,12 +470,12 @@ O, agrega esto a `package.json`:
 ```json
 {
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "@babel/eslint-parser"
   }
 }
 ```
 
-Si `standard` está instalado globalmente (ej: `npm install standard --global`), entonces asegúrate de instalar `babel-eslint` globalmente también com `npm install babel-eslint --global`.
+Si `standard` está instalado globalmente (ej: `npm install standard --global`), entonces asegúrate de instalar `@babel/eslint-parser` globalmente también com `npm install @babel/eslint-parser --global`.
 
 ## ¿Puedo usar una variación de lenguaje JavaScript, como Flow?
 
@@ -491,7 +494,7 @@ O, agrega esto a `package.json`:
 ```json
 {
   "standard": {
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "plugins": [
       "flowtype"
     ]
@@ -577,7 +580,7 @@ function xargs-r() {
   # Portable version of "xargs -r". The -r flag is a GNU extension that
   # prevents xargs from running if there are no input files.
   if IFS= read -r -d $'\n' path; then
-    { echo "$path"; cat; } | xargs $@
+    echo "$path" | cat - | xargs "$@"
   fi
 }
 git diff --name-only --cached --relative | grep '\.jsx\?$' | sed 's/[^[:alnum:]]/\\&/g' | xargs-r -E '' -t standard
@@ -620,7 +623,7 @@ var opts = {
   globals: [],  // global variables to declare
   plugins: [],  // eslint plugins
   envs: [],     // eslint environment
-  parser: ''    // js parser (e.g. babel-eslint)
+  parser: ''    // js parser (e.g. @babel/eslint-parser)
 }
 ```
 
@@ -656,7 +659,7 @@ var opts = {
   globals: [],  // global variables to declare
   plugins: [],  // eslint plugins
   envs: [],     // eslint environment
-  parser: ''    // js parser (e.g. babel-eslint)
+  parser: ''    // js parser (e.g. @babel/eslint-parser)
 }
 ```
 

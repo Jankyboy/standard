@@ -13,10 +13,15 @@
   <a href="https://www.npmjs.com/package/standard"><img src="https://img.shields.io/npm/v/standard.svg" alt="npm version"></a>
 </p>
 
+<h5 align="center">
+  Sponsored by&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://speakeasy.co/?utm_source=standardjs.com&utm_medium=sponsorship&utm_campaign=standard"><img src="https://speakeasy.co/logo-text.png" alt="Speakeasy" height=50 valign="middle"></a>
+</h5>
+
 <p align="center">
   <a href="/docs/README-en.md">English</a> •
   <a href="/docs/README-esla.md">Español (Latinoamérica)</a> •
   <a href="/docs/README-fr.md">Français</a> •
+  <a href="/docs/README-id.md">Bahasa Indonesia</a> •
   <a href="/docs/README-iteu.md">Italiano (Italian)</a> •
   <a href="/docs/README-ja.md">日本語 (Japanese)</a> •
   <a href="/docs/README-kokr.md">한국어 (Korean)</a> •
@@ -24,8 +29,6 @@
   <a href="/docs/README-zhcn.md">简体中文 (Simplified Chinese)</a> •
   <a href="/docs/README-zhtw.md">繁體中文 (Taiwanese Mandarin)</a>
 </p>
-
-<br>
 
 Sem ter que tomar decisões; Sem gerenciar `.eslintrc`, `.jshintrc`, ou `.jscsrc` . Funciona logo de cara.
 
@@ -244,19 +247,19 @@ Selecione o registro da extensão do **["Standard Code Style"][brackets-1]**.
 
 #### [Visual Studio Code](https://code.visualstudio.com/)
 
-Instale **[vscode-standardjs][vscode-1]**. (Inclui suporte para formatação automática.)
+Instale **[vscode-standard][vscode-1]**. (Inclui suporte para formatação automática.)
 
 Para snippets de React, instale  **[vscode-react-standard][vscode-2]**.
 
-[vscode-1]: https://marketplace.visualstudio.com/items/chenxsan.vscode-standardjs
-[vscode-2]: https://marketplace.visualstudio.com/items/TimonVS.ReactSnippetsStandard
+[vscode-1]: https://marketplace.visualstudio.com/items?itemName=standard.vscode-standard
+[vscode-2]: https://marketplace.visualstudio.com/items?itemName=TimonVS.ReactSnippetsStandard
 
 #### [WebStorm/PhpStorm][webstorm-1]
 
 Ambos PhpStorm e WebStorm podem ser  [configurados para Standard Style][webstorm-2].
 
 [webstorm-1]: https://www.jetbrains.com/webstorm/
-[webstorm-2]: https://github.com/standard/standard/blob/master/docs/webstorm.md
+[webstorm-2]: webstorm.md
 
 ## FAQ
 
@@ -378,17 +381,17 @@ Se você possui centenas de arquivos, adicionar comentários em cada um pode fic
 Antes de usar um custom parser, considere se a complexidade a mais no seu código faz com que o processo valha a pena.
 
 `standard` suporta custom JS parsers. Para usar um custom parser, instale via npm
-(por exemplo: `npm install babel-eslint`) e adicione isso ao seu `package.json`:
+(por exemplo: `npm install @babel/eslint-parser`) e adicione isso ao seu `package.json`:
 
 ```json
 {
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "@babel/eslint-parser"
   }
 }
 ```
 
-Se você está usando  `standard` de forma global (instalou com `-g`), você vai precisar instalar  `babel-eslint` globalmente como `npm install babel-eslint -g`.
+Se você está usando  `standard` de forma global (instalou com `-g`), você vai precisar instalar  `@babel/eslint-parser` globalmente como `npm install @babel/eslint-parser -g`.
 
 ### Posso usar uma linguagem variante de JavaScript, tipo Flow?
 
@@ -399,7 +402,7 @@ Antes de usar uma variante de JS customizada, considere se a complexidade a mais
 ```json
 {
   "standard": {
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "plugins": [
       "flowtype"
     ]
@@ -453,7 +456,7 @@ function xargs-r() {
   # Portable version of "xargs -r". The -r flag is a GNU extension that
   # prevents xargs from running if there are no input files.
   if IFS= read -r -d $'\n' path; then
-    { echo "$path"; cat; } | xargs $@
+    echo "$path" | cat - | xargs "$@"
   fi
 }
 git diff --name-only --cached --relative | grep '\.jsx\?$' | sed 's/[^[:alnum:]]/\\&/g' | xargs-r -E '' -t standard
@@ -503,7 +506,7 @@ var opts = {
   globals: [],  // declaração de variáveis globais
   plugins: [],  // plugins eslint
   envs: [],     // ambiente eslint
-  parser: ''    // js parser (e.g. babel-eslint)
+  parser: ''    // js parser (e.g. @babel/eslint-parser)
 }
 ```
 
@@ -538,7 +541,7 @@ var opts = {
   globals: [],  // variáveis globais para declarar
   plugins: [],  // plugins eslint
   envs: [],     // ambiente eslint
-  parser: ''    // js parser (e.g. babel-eslint)
+  parser: ''    // js parser (e.g. @babel/eslint-parser)
 }
 ```
 

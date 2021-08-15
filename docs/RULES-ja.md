@@ -4,6 +4,7 @@
   <a href="/docs/RULES-en.md">English</a> •
   <a href="/docs/RULES-esla.md">Español (Latinoamérica)</a> •
   <a href="/docs/RULES-fr.md">Français</a> •
+  <a href="/docs/RULES-id.md">Bahasa Indonesia</a> •
   <a href="/docs/RULES-iteu.md">Italiano (Italian)</a> •
   <a href="/docs/RULES-ja.md">日本語 (Japanese)</a> •
   <a href="/docs/RULES-kokr.md">한국어 (Korean)</a> •
@@ -406,13 +407,21 @@
   ```js
   class Dog {
     constructor () {
-      super()   // ✗ avoid
+      super()             // ✗ avoid
+      this.legs = 4
     }
   }
 
-  class Dog extends Mammal {
+  class Dog extends Animal {
+    constructor () {      // ✗ avoid
+      this.legs = 4
+    }
+  }
+
+  class Dog extends Animal {
     constructor () {
-      super()   // ✓ ok
+      super()             // ✓ ok
+      this.legs = 4
     }
   }
   ```

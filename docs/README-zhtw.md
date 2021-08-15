@@ -13,10 +13,15 @@
   <a href="https://www.npmjs.com/package/standard"><img src="https://img.shields.io/npm/v/standard.svg" alt="npm version"></a>
 </p>
 
+<h5 align="center">
+  Sponsored by&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://speakeasy.co/?utm_source=standardjs.com&utm_medium=sponsorship&utm_campaign=standard"><img src="https://speakeasy.co/logo-text.png" alt="Speakeasy" height=50 valign="middle"></a>
+</h5>
+
 <p align="center">
   <a href="/docs/README-en.md">English</a> •
   <a href="/docs/README-esla.md">Español (Latinoamérica)</a> •
   <a href="/docs/README-fr.md">Français</a> •
+  <a href="/docs/README-id.md">Bahasa Indonesia</a> •
   <a href="/docs/README-iteu.md">Italiano (Italian)</a> •
   <a href="/docs/README-ja.md">日本語 (Japanese)</a> •
   <a href="/docs/README-kokr.md">한국어 (Korean)</a> •
@@ -24,8 +29,6 @@
   <a href="/docs/README-zhcn.md">简体中文 (Simplified Chinese)</a> •
   <a href="/docs/README-zhtw.md">繁體中文 (Taiwanese Mandarin)</a>
 </p>
-
-<br>
 
 什麼都不用想。不用管理 `.eslintrc` 、 `.jshintrc` 或 `.jscsrc` 等檔案。就是這麼容易。
 
@@ -205,7 +208,7 @@ JavaScript Standard Style 的美來自於它的簡單，沒有人想要在每個
 |---|---|---|---|
 
 
-| Your logo here | Your logo here | Your logo here | Your logo here |
+| [<img width=190 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/jublia.png>](https://jublia.com/) | Your logo here | Your logo here | Your logo here |
 |---|---|---|---|
 
 
@@ -242,13 +245,13 @@ JavaScript Standard Style 的美來自於它的簡單，沒有人想要在每個
 
 ### Visual Studio Code
 
-安裝 **[vscode-standardjs][vscode-1]**. (包含自動修改樣式的支援。)
+安裝 **[vscode-standard][vscode-1]**. (包含自動修改樣式的支援。)
 
 需要 JS 自動補完，可以安裝： **[vscode-standardjs-snippets][vscode-2]**。 需要 React 自動補完，可以安裝： **[vscode-react-standard][vscode-3]**。
 
-[vscode-1]: https://marketplace.visualstudio.com/items/chenxsan.vscode-standardjs
+[vscode-1]: https://marketplace.visualstudio.com/items?itemName=standard.vscode-standard
 [vscode-2]: https://marketplace.visualstudio.com/items?itemName=capaj.vscode-standardjs-snippets
-[vscode-3]: https://marketplace.visualstudio.com/items/TimonVS.ReactSnippetsStandard
+[vscode-3]: https://marketplace.visualstudio.com/items?itemName=TimonVS.ReactSnippetsStandard
 
 ### Vim
 
@@ -286,7 +289,7 @@ WebStorm [近期發佈了原生支援](https://blog.jetbrains.com/webstorm/2017/
 
 如果你還是傾向要手動設定 `standard`，[可以參考這個教學][webstorm-1]。這可以套用至所有 JetBrains 的產品，包括 PhpStorm、IntelliJ、RubyMine 等等。
 
-[webstorm-1]: docs/webstorm.md
+[webstorm-1]: webstorm.md
 
 ## 有 README 專用的 standard 徽章嗎？
 
@@ -424,10 +427,10 @@ $ standard --global myVar1 --global myVar2
 
 為了支援實驗性質的語法，`standard` 支援客製化 JavaScript 語法解析器。在使用客製化語法解析器前，請考慮清楚是否值得去增加這些複雜度。
 
-要使用客製化語法解析器，可以從 npm 安裝（比如說：`npm install babel-eslint`），然後執行：
+要使用客製化語法解析器，可以從 npm 安裝（比如說：`npm install @babel/eslint-parser`），然後執行：
 
 ```bash
-$ standard --parser babel-eslint
+$ standard --parser @babel/eslint-parser
 ```
 
 或在 `package.json` 中加入：
@@ -435,12 +438,12 @@ $ standard --parser babel-eslint
 ```json
 {
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "@babel/eslint-parser"
   }
 }
 ```
 
-如果你是把 `standard` 裝在全域下（就是 `npm install standard --global`），那麼請確保 `babel-eslint` 也是用 `npm install babel-eslint --global` 裝在全域下。
+如果你是把 `standard` 裝在全域下（就是 `npm install standard --global`），那麼請確保 `@babel/eslint-parser` 也是用 `npm install @babel/eslint-parser --global` 裝在全域下。
 
 ## 我可以使用 JavaScript 的變體，像是 Flow 嗎？
 
@@ -536,7 +539,7 @@ function xargs-r() {
   # Portable version of "xargs -r". The -r flag is a GNU extension that
   # prevents xargs from running if there are no input files.
   if IFS= read -r -d $'\n' path; then
-    { echo "$path"; cat; } | xargs $@
+    echo "$path" | cat - | xargs "$@"
   fi
 }
 git diff --name-only --cached --relative | grep '\.jsx\?$' | sed 's/[^[:alnum:]]/\\&/g' | xargs-r -E '' -t standard
@@ -576,7 +579,7 @@ var opts = {
   globals: [],  // 會用到的全域變數
   plugins: [],  // eslint 外掛
   envs: [],     // eslint 環境
-  parser: ''    // javascript 語法解析器 （比如說 babel-eslint）
+  parser: ''    // javascript 語法解析器 （比如說 @babel/eslint-parser）
 }
 ```
 
@@ -611,7 +614,7 @@ var opts = {
   globals: [],  // 會用到的全域變數
   plugins: [],  // eslint 外掛
   envs: [],     // eslint 環境
-  parser: ''    // javascript 語法解析器 （比如說 babel-eslint）
+  parser: ''    // javascript 語法解析器 （比如說 @babel/eslint-parser）
 }
 ```
 
