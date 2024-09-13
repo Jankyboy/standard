@@ -4,6 +4,7 @@
   <a href="/docs/RULES-en.md">English</a> •
   <a href="/docs/RULES-esla.md">Español (Latinoamérica)</a> •
   <a href="/docs/RULES-fr.md">Français</a> •
+  <a href="/docs/RULES-id.md">Bahasa Indonesia</a> •
   <a href="/docs/RULES-iteu.md">Italiano (Italian)</a> •
   <a href="/docs/RULES-ja.md">日本語 (Japanese)</a> •
   <a href="/docs/RULES-kokr.md">한국어 (Korean)</a> •
@@ -406,13 +407,21 @@
   ```js
   class Dog {
     constructor () {
-      super()   // ✗ avoid
+      super()             // ✗ avoid
+      this.legs = 4
     }
   }
 
-  class Dog extends Mammal {
+  class Dog extends Animal {
+    constructor () {      // ✗ avoid
+      this.legs = 4
+    }
+  }
+
+  class Dog extends Animal {
     constructor () {
-      super()   // ✓ ok
+      super()             // ✓ ok
+      this.legs = 4
     }
   }
   ```
@@ -1307,7 +1316,7 @@
 
 ## セミコロン
 
-* セミコロンは不要。 （右記を参照のこと： [1](http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding)、 [2](http://inimino.org/%7Einimino/blog/javascript_semicolons)、 [3](https://www.youtube.com/watch?v=gsfbh17Ax9I)）
+* セミコロンは不要。 （右記を参照のこと： [1](http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding)、 [2](https://web.archive.org/web/20201206065632/http://inimino.org/~inimino/blog/javascript_semicolons)、 [3](https://www.youtube.com/watch?v=gsfbh17Ax9I)）
 
   eslint: [`semi`](http://eslint.org/docs/rules/semi)
 
@@ -1421,5 +1430,5 @@
 > The advantage is that the prefixes are easier to notice, once you are accustomed to never seeing lines starting with `(` or `[` without semis.
 
 [1]: http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding
-[2]: http://inimino.org/~inimino/blog/javascript_semicolons
+[2]: https://web.archive.org/web/20201206065632/http://inimino.org/~inimino/blog/javascript_semicolons
 [3]: https://www.youtube.com/watch?v=gsfbh17Ax9I

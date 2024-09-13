@@ -13,10 +13,15 @@
   <a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="Standard - JavaScript Style Guide"></a>
 </p>
 
+<h5 align="center">
+  Sponsored by&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://socket.dev"><img src="https://cdn.rawgit.com/standard/standard/master/docs/logos/socket.png" alt="Socket – Supply Chain Dependency Security for JavaScript and npm" height=50 valign="middle"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://wormhole.app/?utm_medium=sponsorship&utm_source=standard&utm_campaign=feross"><img src="https://cdn.rawgit.com/standard/standard/master/docs/logos/wormhole.png" alt="Wormhole" height=50 valign="middle"></a>
+</h5>
+
 <p align="center">
   <a href="/docs/README-en.md">English</a> •
   <a href="/docs/README-esla.md">Español (Latinoamérica)</a> •
   <a href="/docs/README-fr.md">Français</a> •
+  <a href="/docs/README-id.md">Bahasa Indonesia</a> •
   <a href="/docs/README-iteu.md">Italiano (Italian)</a> •
   <a href="/docs/README-ja.md">日本語 (Japanese)</a> •
   <a href="/docs/README-kokr.md">한국어 (Korean)</a> •
@@ -24,8 +29,6 @@
   <a href="/docs/README-zhcn.md">简体中文 (Simplified Chinese)</a> •
   <a href="/docs/README-zhtw.md">繁體中文 (Taiwanese Mandarin)</a>
 </p>
-
-<br>
 
 ## JavaScript 代码规范，自带 linter & 代码自动修正
 
@@ -62,7 +65,7 @@ npm install standard --save-dev
 - **[查看更多][5]** – *为何不试试 `standard` 规范呢！*
 
 [1]: http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding
-[2]: http://inimino.org/~inimino/blog/javascript_semicolons
+[2]: https://web.archive.org/web/20201206065632/http://inimino.org/~inimino/blog/javascript_semicolons
 [3]: https://www.youtube.com/watch?v=gsfbh17Ax9I
 [4]: RULES-zhcn.md#semicolons
 [5]: RULES-zhcn.md#javascript-standard-style
@@ -211,7 +214,7 @@ $ standard "src/util/**/*.js" "test/**/*.js"
 |---|---|---|---|
 
 
-| Your logo here | Your logo here | Your logo here | Your logo here |
+| [<img width=190 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/jublia.png>](https://jublia.com/) | Your logo here | Your logo here | Your logo here |
 |---|---|---|---|
 
 
@@ -247,13 +250,13 @@ $ standard "src/util/**/*.js" "test/**/*.js"
 
 ### Visual Studio Code
 
-安装 **[vscode-standardjs][vscode-1]**（已经包含了自动格式化）。
+安装 **[vscode-standard][vscode-1]**（已经包含了自动格式化）。
 
 安装 **[vscode-standardjs-snippets][vscode-2]** 以获得 JS snippets。安装 **[vscode-react-standard][vscode-3]** 以获得 React snippets。
 
-[vscode-1]: https://marketplace.visualstudio.com/items/chenxsan.vscode-standardjs
+[vscode-1]: https://marketplace.visualstudio.com/items?itemName=standard.vscode-standard
 [vscode-2]: https://marketplace.visualstudio.com/items?itemName=capaj.vscode-standardjs-snippets
-[vscode-3]: https://marketplace.visualstudio.com/items/TimonVS.ReactSnippetsStandard
+[vscode-3]: https://marketplace.visualstudio.com/items?itemName=TimonVS.ReactSnippetsStandard
 
 ### Vim
 
@@ -363,14 +366,6 @@ WebStorm [最近宣布](https://blog.jetbrains.com/webstorm/2017/01/webstorm-201
 
 JavaScript Standard 代码规范底层使用的是 [ESLint](http://eslint.org/)。所以如果你想隐藏某些警告，方法和使用 ESLint 时一样。
 
-打印详细信息（这样你就能找到你想隐藏的警告在配置中对应的名称了）：
-
-```bash
-$ standard --verbose
-Error: Use JavaScript Standard Style
-  routes/error.js:20:36: 'file' was used before it was defined. (no-use-before-define)
-```
-
 对某一行禁用**所有规则**：
 ```js
 file = 'I know what I am doing' // eslint-disable-line
@@ -424,10 +419,10 @@ $ standard --global myVar1 --global myVar2
 
 为了支持实验性的特性，`standard` 支持自定义 JavaScript 解析器。添加自定义解析器前请思考一下必要性。
 
-从 npm 安装并使用自定义的解析器（示例：`npm install babel-eslint`）：
+从 npm 安装并使用自定义的解析器（示例：`npm install @babel/eslint-parser`）：
 
 ```bash
-$ standard --parser babel-eslint
+$ standard --parser @babel/eslint-parser
 ```
 
 或者将其添加到  `package.json` 配置中：
@@ -435,12 +430,12 @@ $ standard --parser babel-eslint
 ```json
 {
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "@babel/eslint-parser"
   }
 }
 ```
 
-如果全局安装（`npm install standard --global`）了 `standard` 的话，那么请确保 `babel-eslint` 也用 `npm install babel-eslint --global` 全局安装。
+如果全局安装（`npm install standard --global`）了 `standard` 的话，那么请确保 `@babel/eslint-parser` 也用 `npm install @babel/eslint-parser --global` 全局安装。
 
 ## 我能使用其他 JavaScript 变种吗，例如 Flow？
 
@@ -539,7 +534,7 @@ function xargs-r() {
   # Portable version of "xargs -r". The -r flag is a GNU extension that
   # prevents xargs from running if there are no input files.
   if IFS= read -r -d $'\n' path; then
-    { echo "$path"; cat; } | xargs $@
+    echo "$path" | cat - | xargs "$@"
   fi
 }
 git diff --name-only --cached --relative | grep '\.jsx\?$' | sed 's/[^[:alnum:]]/\\&/g' | xargs-r -E '' -t standard
@@ -560,7 +555,7 @@ $ npm install snazzy
 然后运行：
 
 ```bash
-$ standard --verbose | snazzy
+$ standard | snazzy
 ```
 
 还有 [standard-tap](https://www.npmjs.com/package/standard-tap)、
@@ -572,30 +567,34 @@ $ standard --verbose | snazzy
 
 有！
 
-### `standard.lintText(text, [opts], callback)`
+### `async standard.lintText(text, [opts])`
 
 检查传入的  `text`。需要提供一个 `opts` 配置参数：
 
 ```js
 {
-  cwd: '',      // 当前工作目录（默认为：process.cwd()）
-  filename: '', // 需要检查的文件的路径（可选，虽然有些 eslint 插件需要该参数）
-  fix: false,   // 是否自动修复问题
-  globals: [],  // 声明需要跳过检测的定义全局变量
-  plugins: [],  // 自定义的 eslint 插件列表
-  envs: [],     // 自定义的 eslint 环境
-  parser: ''    // 自定义的 js 解析器（例如 babel-eslint）
+  // unique to lintText
+  filename: '',         // path of file containing the text being linted
+
+  // common to lintText and lintFiles
+  cwd: '',              // current working directory (default: process.cwd())
+  fix: false,           // automatically fix problems
+  extensions: [],       // file extensions to lint (has sane defaults)
+  globals: [],          // custom global variables to declare
+  plugins: [],          // custom eslint plugins
+  envs: [],             // custom eslint environment
+  parser: '',           // custom js parser (e.g. babel-eslint)
+  usePackageJson: true, // use options from nearest package.json?
+  useGitIgnore: true    // use file ignore patterns from .gitignore?
 }
 ```
 
 如果 `package.json` 有相应配置也会自动被读取到。
 
-完成后会调用 `callback` 回调并传入  `Error` 和 `results`。
-
 包含结果的  `results` 包含如下属性：
 
 ```js
-var results = {
+const results = {
   results: [
     {
       filePath: '',
@@ -612,23 +611,25 @@ var results = {
 }
 ```
 
-### `results = standard.lintTextSync(text, [opts])`
-
-`standard.lintText()` 的同步版本。如果运行出错，会抛出异常。否则返回 `results`。
-
-### `standard.lintFiles(files, [opts], callback)`
+### `async standard.lintFiles(files, [opts])`
 
 检查以 glob 形式指定的 `files` 参数所匹配到的所有文件。可以传入一个 `opts` 配置参数：
 
 ```js
-var opts = {
-  ignore: [],   // glob 形式的排除列表 (一般无须配置)
-  cwd: '',      // 当前工作目录（默认为：process.cwd()）
-  fix: false,   // 是否自动修复问题
-  globals: [],  // 声明需要跳过检测的定义全局变量
-  plugins: [],  // eslint 插件列表
-  envs: [],     // eslint 环境
-  parser: ''    // js 解析器（例如 babel-eslint）
+{
+  // unique to lintFiles
+  ignore: [],           // file globs to ignore (has sane defaults)
+
+  // common to lintText and lintFiles
+  cwd: '',              // current working directory (default: process.cwd())
+  fix: false,           // automatically fix problems
+  extensions: [],       // file extensions to lint (has sane defaults)
+  globals: [],          // custom global variables to declare
+  plugins: [],          // custom eslint plugins
+  envs: [],             // custom eslint environment
+  parser: '',           // custom js parser (e.g. babel-eslint)
+  usePackageJson: true, // use options from nearest package.json?
+  useGitIgnore: true    // use file ignore patterns from .gitignore?
 }
 ```
 

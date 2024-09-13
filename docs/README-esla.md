@@ -13,10 +13,15 @@
   <a href="https://www.npmjs.com/package/standard"><img src="https://img.shields.io/npm/v/standard.svg" alt="npm version"></a>
 </p>
 
+<h5 align="center">
+  Sponsored by&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://socket.dev"><img src="https://cdn.rawgit.com/standard/standard/master/docs/logos/socket.png" alt="Socket – Supply Chain Dependency Security for JavaScript and npm" height=50 valign="middle"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://wormhole.app/?utm_medium=sponsorship&utm_source=standard&utm_campaign=feross"><img src="https://cdn.rawgit.com/standard/standard/master/docs/logos/wormhole.png" alt="Wormhole" height=50 valign="middle"></a>
+</h5>
+
 <p align="center">
   <a href="/docs/README-en.md">English</a> •
   <a href="/docs/README-esla.md">Español (Latinoamérica)</a> •
   <a href="/docs/README-fr.md">Français</a> •
+  <a href="/docs/README-id.md">Bahasa Indonesia</a> •
   <a href="/docs/README-iteu.md">Italiano (Italian)</a> •
   <a href="/docs/README-ja.md">日本語 (Japanese)</a> •
   <a href="/docs/README-kokr.md">한국어 (Korean)</a> •
@@ -24,8 +29,6 @@
   <a href="/docs/README-zhcn.md">简体中文 (Simplified Chinese)</a> •
   <a href="/docs/README-zhtw.md">繁體中文 (Taiwanese Mandarin)</a>
 </p>
-
-<br>
 
 ## Guía de estilos JavaScript, con linter y corrección automática de código
 
@@ -64,7 +67,7 @@ npm install standard --save-dev
 - **Y [mucho más][5]** – *prueba `standard` hoy mismo!*
 
 [1]: http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding
-[2]: http://inimino.org/~inimino/blog/javascript_semicolons
+[2]: https://web.archive.org/web/20201206065632/http://inimino.org/~inimino/blog/javascript_semicolons
 [3]: https://www.youtube.com/watch?v=gsfbh17Ax9I
 [4]: RULES-esla.md#semicolons
 [5]: RULES-esla.md#javascript-standard-style
@@ -229,7 +232,7 @@ Adoptar estilos `standard` significa clasificar la importancia de la claridad de
 |---|---|---|---|
 
 
-| Your logo here | Your logo here | Your logo here | Your logo here |
+| [<img width=190 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/jublia.png>](https://jublia.com/) | Your logo here | Your logo here | Your logo here |
 |---|---|---|---|
 
 
@@ -268,14 +271,14 @@ instale **[standardjs-snippets][atom-3]**.
 
 #### Visual Studio Code
 
-Instale **[vscode-standardjs][vscode-1]**. (Incluye soporte para formateo automático.)
+Instale **[vscode-standard][vscode-1]**. (Incluye soporte para formateo automático.)
 
 Para snippets JS, instale: **[vscode-standardjs-snippets][vscode-2]**.
 Para snippets React, instale **[vscode-react-standard][vscode-3]**.
 
-[vscode-1]: https://marketplace.visualstudio.com/items/chenxsan.vscode-standardjs
+[vscode-1]: https://marketplace.visualstudio.com/items?itemName=standard.vscode-standard
 [vscode-2]: https://marketplace.visualstudio.com/items?itemName=capaj.vscode-standardjs-snippets
-[vscode-3]: https://marketplace.visualstudio.com/items/TimonVS.ReactSnippetsStandard
+[vscode-3]: https://marketplace.visualstudio.com/items?itemName=TimonVS.ReactSnippetsStandard
 
 #### Vim
 
@@ -312,7 +315,7 @@ Busque el registro de extension para **["Standard Code Style"][brackets-1]**.
 
 WebStorm [recientemente anuncio soporte nativo](https://blog.jetbrains.com/webstorm/2017/01/webstorm-2017-1-eap-171-2272/) para `standard` directamente en el IDE.
 
-Si aun prefieres configurar `standard` manualmente [sigue esta guía](webstorm-2). Esto se aplica a todos los productos de JetBrains, incluyendo PhpStorm, IntelliJ, RubyMine y etc.
+Si aun prefieres configurar `standard` manualmente [sigue esta guía][webstorm-2]. Esto se aplica a todos los productos de JetBrains, incluyendo PhpStorm, IntelliJ, RubyMine y etc.
 
 [webstorm-1]: https://www.jetbrains.com/webstorm/
 [webstorm-2]: webstorm.md
@@ -390,14 +393,6 @@ En raros casos, necesitarás romper una regla y ocultar la alerta generada por `
 
 JavaScript Standard Style usa [ESLint](http://eslint.org/) bajo la capucha y puedes ocultar las alertas como normalmente lo harías si usaras ESLint directamente.
 
-Para obtener una salida más específica (así puedes encontrar el nombre de la regla a ignorar) ejecute:
-
-```bash
-$ standard --verbose
-Error: Use JavaScript Standard Style
-  routes/error.js:20:36: 'file' was used before it was defined. (no-use-before-define)
-```
-
 Inhabilitar **toda las reglas** en una línea específica:
 
 ```js
@@ -456,10 +451,10 @@ de las propuestas que estan en "Stage 4" del proceso de propuestas.
 
 Para soportar características experimentales del lenguaje, `standard` soporta especificar un parser JS customizado. Antes de que uses un parser customizado, considera si la complejidad agregada vale la pena.
 
-Para usar un parser customizado, instálalo desde npm (ejemplo: `npm install babel-eslint`) y ejecuta esto:
+Para usar un parser customizado, instálalo desde npm (ejemplo: `npm install @babel/eslint-parser`) y ejecuta esto:
 
 ```bash
-$ standard --parser babel-eslint
+$ standard --parser @babel/eslint-parser
 ```
 
 O, agrega esto a `package.json`:
@@ -467,12 +462,12 @@ O, agrega esto a `package.json`:
 ```json
 {
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "@babel/eslint-parser"
   }
 }
 ```
 
-Si `standard` está instalado globalmente (ej: `npm install standard --global`), entonces asegúrate de instalar `babel-eslint` globalmente también com `npm install babel-eslint --global`.
+Si `standard` está instalado globalmente (ej: `npm install standard --global`), entonces asegúrate de instalar `@babel/eslint-parser` globalmente también com `npm install @babel/eslint-parser --global`.
 
 ## ¿Puedo usar una variación de lenguaje JavaScript, como Flow?
 
@@ -491,7 +486,7 @@ O, agrega esto a `package.json`:
 ```json
 {
   "standard": {
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "plugins": [
       "flowtype"
     ]
@@ -577,7 +572,7 @@ function xargs-r() {
   # Portable version of "xargs -r". The -r flag is a GNU extension that
   # prevents xargs from running if there are no input files.
   if IFS= read -r -d $'\n' path; then
-    { echo "$path"; cat; } | xargs $@
+    echo "$path" | cat - | xargs "$@"
   fi
 }
 git diff --name-only --cached --relative | grep '\.jsx\?$' | sed 's/[^[:alnum:]]/\\&/g' | xargs-r -E '' -t standard
@@ -599,7 +594,7 @@ $ npm install snazzy
 y ejecutar:
 
 ```bash
-$ standard --verbose | snazzy
+$ standard | snazzy
 ```
 
 También tienes [standard-tap](https://www.npmjs.com/package/standard-tap),
@@ -609,25 +604,33 @@ También tienes [standard-tap](https://www.npmjs.com/package/standard-tap),
 
 ## Node.js API
 
-### `standard.lintText(text, [opts], callback)`
+### `async standard.lintText(text, [opts])`
 
 Hacer Lint al texto fuente previsto para hacer cumplir JavaScript Standard Style.
 Un objeto `opts` puede ser proporcionado:
 
 ```js
-var opts = {
-  fix: false,   // automatically fix problems
-  globals: [],  // global variables to declare
-  plugins: [],  // eslint plugins
-  envs: [],     // eslint environment
-  parser: ''    // js parser (e.g. babel-eslint)
+{
+  // unique to lintText
+  filename: '',         // path of file containing the text being linted
+
+  // common to lintText and lintFiles
+  cwd: '',              // current working directory (default: process.cwd())
+  fix: false,           // automatically fix problems
+  extensions: [],       // file extensions to lint (has sane defaults)
+  globals: [],          // custom global variables to declare
+  plugins: [],          // custom eslint plugins
+  envs: [],             // custom eslint environment
+  parser: '',           // custom js parser (e.g. babel-eslint)
+  usePackageJson: true, // use options from nearest package.json?
+  useGitIgnore: true    // use file ignore patterns from .gitignore?
 }
 ```
 
-El `callback` será llamado con un objeto de `Error` y `results`:
+`results` objeto :
 
 ```js
-var results = {
+const results = {
   results: [
     {
       filePath: '',
@@ -635,7 +638,8 @@ var results = {
         { ruleId: '', message: '', line: 0, column: 0 }
       ],
       errorCount: 0,
-      warningCount: 0
+      warningCount: 0,
+      output: '' // fixed source code (only present with {fix: true} option)
     }
   ],
   errorCount: 0,
@@ -643,24 +647,30 @@ var results = {
 }
 ```
 
-### `standard.lintFiles(files, [opts], callback)`
+### `async standard.lintFiles(files, [opts])`
 
 Hacer Lint a los archivos que concuerden con el patrón globs.
 Un objeto `opts` puede ser proporcionado:
 
 ```js
-var opts = {
-  ignore: [],   // file globs to ignore (has sane defaults)
-  cwd: '',      // current working directory (default: process.cwd())
-  fix: false,   // automatically fix problems
-  globals: [],  // global variables to declare
-  plugins: [],  // eslint plugins
-  envs: [],     // eslint environment
-  parser: ''    // js parser (e.g. babel-eslint)
+{
+  // unique to lintFiles
+  ignore: [],           // file globs to ignore (has sane defaults)
+
+  // common to lintText and lintFiles
+  cwd: '',              // current working directory (default: process.cwd())
+  fix: false,           // automatically fix problems
+  extensions: [],       // file extensions to lint (has sane defaults)
+  globals: [],          // custom global variables to declare
+  plugins: [],          // custom eslint plugins
+  envs: [],             // custom eslint environment
+  parser: '',           // custom js parser (e.g. babel-eslint)
+  usePackageJson: true, // use options from nearest package.json?
+  useGitIgnore: true    // use file ignore patterns from .gitignore?
 }
 ```
 
-El `callback` será llamado con un objeto de `Error` y `results`: (igual al de arriba).
+Objeto `results` (igual al de arriba).
 
 ## ¿Cómo puedo contribuir a `standard`?
 

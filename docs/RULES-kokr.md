@@ -4,6 +4,7 @@
   <a href="/docs/RULES-en.md">English</a> •
   <a href="/docs/RULES-esla.md">Español (Latinoamérica)</a> •
   <a href="/docs/RULES-fr.md">Français</a> •
+  <a href="/docs/RULES-id.md">Bahasa Indonesia</a> •
   <a href="/docs/RULES-iteu.md">Italiano (Italian)</a> •
   <a href="/docs/RULES-ja.md">日本語 (Japanese)</a> •
   <a href="/docs/RULES-kokr.md">한국어 (Korean)</a> •
@@ -202,12 +203,12 @@
   ```js
   // ✗ 피하세요
   var value = 'hello world'
-
-
+  // blank line
+  // blank line
   console.log(value)
   ```
 
-여러 줄의 **삼항 연산자** 를 사용할 경우 `?`와 `:`를 각각의 행으로 처리해야합니다.
+* 여러 줄의 **삼항 연산자** 를 사용할 경우 `?`와 `:`를 각각의 행으로 처리해야합니다.
 
   eslint: [`operator-linebreak`](http://eslint.org/docs/rules/operator-linebreak)
 
@@ -486,7 +487,7 @@
   }
   ```
 
-** **변수에 `delete` 연산자는 없습니다.**
+* **변수에 `delete` 연산자는 없습니다.**
 
   eslint: [`no-delete-var`](http://eslint.org/docs/rules/no-delete-var)
 
@@ -1292,7 +1293,7 @@
 
 ## 세미콜론
 
-* 세미콜론은 사용하지 않습니다.. (볼거리: [1](http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding), [2](http://inimino.org/%7Einimino/blog/javascript_semicolons), [3](https://www.youtube.com/watch?v=gsfbh17Ax9I))
+* 세미콜론은 사용하지 않습니다.. (볼거리: [1](http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding), [2](https://web.archive.org/web/20201206065632/http://inimino.org/~inimino/blog/javascript_semicolons), [3](https://www.youtube.com/watch?v=gsfbh17Ax9I))
 
   eslint: [`semi`](http://eslint.org/docs/rules/semi)
 
@@ -1399,5 +1400,5 @@
 > 장점은 `(` 또는 `[` 없이 세미콜론으로 시작하는 줄을 보지 못한다면 익숙해지기 쉽습니다.
 
 [1]: http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding
-[2]: http://inimino.org/~inimino/blog/javascript_semicolons
+[2]: https://web.archive.org/web/20201206065632/http://inimino.org/~inimino/blog/javascript_semicolons
 [3]: https://www.youtube.com/watch?v=gsfbh17Ax9I

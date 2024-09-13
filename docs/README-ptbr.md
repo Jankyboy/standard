@@ -13,10 +13,15 @@
   <a href="https://www.npmjs.com/package/standard"><img src="https://img.shields.io/npm/v/standard.svg" alt="npm version"></a>
 </p>
 
+<h5 align="center">
+  Sponsored by&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://socket.dev"><img src="https://cdn.rawgit.com/standard/standard/master/docs/logos/socket.png" alt="Socket – Supply Chain Dependency Security for JavaScript and npm" height=50 valign="middle"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://wormhole.app/?utm_medium=sponsorship&utm_source=standard&utm_campaign=feross"><img src="https://cdn.rawgit.com/standard/standard/master/docs/logos/wormhole.png" alt="Wormhole" height=50 valign="middle"></a>
+</h5>
+
 <p align="center">
   <a href="/docs/README-en.md">English</a> •
   <a href="/docs/README-esla.md">Español (Latinoamérica)</a> •
   <a href="/docs/README-fr.md">Français</a> •
+  <a href="/docs/README-id.md">Bahasa Indonesia</a> •
   <a href="/docs/README-iteu.md">Italiano (Italian)</a> •
   <a href="/docs/README-ja.md">日本語 (Japanese)</a> •
   <a href="/docs/README-kokr.md">한국어 (Korean)</a> •
@@ -24,8 +29,6 @@
   <a href="/docs/README-zhcn.md">简体中文 (Simplified Chinese)</a> •
   <a href="/docs/README-zhtw.md">繁體中文 (Taiwanese Mandarin)</a>
 </p>
-
-<br>
 
 Sem ter que tomar decisões; Sem gerenciar `.eslintrc`, `.jshintrc`, ou `.jscsrc` . Funciona logo de cara.
 
@@ -59,7 +62,7 @@ npm install standard
 - **E [mais benefícios][5]** – *dê uma chance para  `standard` hoje!*
 
 [1]: http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding
-[2]: http://inimino.org/~inimino/blog/javascript_semicolons
+[2]: https://web.archive.org/web/20201206065632/http://inimino.org/~inimino/blog/javascript_semicolons
 [3]: https://www.youtube.com/watch?v=gsfbh17Ax9I
 [4]: RULES-ptbr.md#ponto-e-v%C3%ADrgula
 [5]: RULES-ptbr.md#javascript-standard-style
@@ -83,7 +86,7 @@ Para ter uma idéia melhor, dê uma olhada
   - [Existe um formatador automático?](#existe-um-formatador-autom%C3%A1tico)
   - [Como ignoro arquivos?](#como-ignoro-arquivos)
   - [Como escondo um determinado aviso?](#como-escondo-um-determinado-aviso)
-  - [Eu uso uma biblioteca que polui o namespace global. Como eu previno erros de "variable is not defined"?](#eu-uso-uma-biblioteca-que-polui-o-namespace-global-como-eu-previno-erros-de-variable-is-not-definedfunctions)
+  - [Eu uso uma biblioteca que polui o namespace global. Como eu previno erros de "variable is not defined"?](#eu-uso-uma-biblioteca-que-polui-o-namespace-global-como-eu-previno-erros-de-variable-is-not-defined)
   - [Posso usar um custom parser de JS novinho em folha que saiu ontem para suporte ao ES Next?](#posso-usar-um-custom-parser-de-js-novinho-em-folha-que-saiu-ontem-para-suporte-ao-es-next)
   - [Posso usar uma linguagem variante de JavaScript, tipo Flow?](#posso-usar-uma-linguagem-variante-de-javascript-tipo-flow)
   - [Você pode tornar regra X configurável?](#voc%C3%AA-pode-tornar-regra-x-configur%C3%A1vel)
@@ -95,7 +98,7 @@ Para ter uma idéia melhor, dê uma olhada
 - [Node.js API](#nodejs-api)
   - [`standard.lintText(text, [opts], callback)`](#standardlinttexttext-opts-callback)
   - [`standard.lintFiles(files, [opts], callback)`](#standardlintfilesfiles-opts-callback)
-- [Licensa](#licensa)
+- [Licença](#licen%C3%A7a)
 
 ## Instalação
 
@@ -244,19 +247,19 @@ Selecione o registro da extensão do **["Standard Code Style"][brackets-1]**.
 
 #### [Visual Studio Code](https://code.visualstudio.com/)
 
-Instale **[vscode-standardjs][vscode-1]**. (Inclui suporte para formatação automática.)
+Instale **[vscode-standard][vscode-1]**. (Inclui suporte para formatação automática.)
 
 Para snippets de React, instale  **[vscode-react-standard][vscode-2]**.
 
-[vscode-1]: https://marketplace.visualstudio.com/items/chenxsan.vscode-standardjs
-[vscode-2]: https://marketplace.visualstudio.com/items/TimonVS.ReactSnippetsStandard
+[vscode-1]: https://marketplace.visualstudio.com/items?itemName=standard.vscode-standard
+[vscode-2]: https://marketplace.visualstudio.com/items?itemName=TimonVS.ReactSnippetsStandard
 
 #### [WebStorm/PhpStorm][webstorm-1]
 
 Ambos PhpStorm e WebStorm podem ser  [configurados para Standard Style][webstorm-2].
 
 [webstorm-1]: https://www.jetbrains.com/webstorm/
-[webstorm-2]: https://github.com/standard/standard/blob/master/docs/webstorm.md
+[webstorm-2]: webstorm.md
 
 ## FAQ
 
@@ -323,14 +326,6 @@ Em casos raros, você vai precisar quebrar uma regra e esconder um warning gerad
 
 JavaScript Standard Style usa o [`eslint`](http://eslint.org/) por baixo dos panos, sendo assim, você pode esconder algum aviso da mesma forma que você faria se utilizasse `eslint` diretamente.
 
-Para receber output verboso (para que você descubra que regra em particular precisa ignorar), execute:
-
-```bash
-$ standard --verbose
-Error: Use JavaScript Standard Style
-  routes/error.js:20:36: 'file' was used before it was defined. (no-use-before-define)
-```
-
 Desabilite **todas as regras** em uma linha específica:
 
 ```js
@@ -378,17 +373,17 @@ Se você possui centenas de arquivos, adicionar comentários em cada um pode fic
 Antes de usar um custom parser, considere se a complexidade a mais no seu código faz com que o processo valha a pena.
 
 `standard` suporta custom JS parsers. Para usar um custom parser, instale via npm
-(por exemplo: `npm install babel-eslint`) e adicione isso ao seu `package.json`:
+(por exemplo: `npm install @babel/eslint-parser`) e adicione isso ao seu `package.json`:
 
 ```json
 {
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "@babel/eslint-parser"
   }
 }
 ```
 
-Se você está usando  `standard` de forma global (instalou com `-g`), você vai precisar instalar  `babel-eslint` globalmente como `npm install babel-eslint -g`.
+Se você está usando  `standard` de forma global (instalou com `-g`), você vai precisar instalar  `@babel/eslint-parser` globalmente como `npm install @babel/eslint-parser -g`.
 
 ### Posso usar uma linguagem variante de JavaScript, tipo Flow?
 
@@ -399,7 +394,7 @@ Antes de usar uma variante de JS customizada, considere se a complexidade a mais
 ```json
 {
   "standard": {
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "plugins": [
       "flowtype"
     ]
@@ -453,7 +448,7 @@ function xargs-r() {
   # Portable version of "xargs -r". The -r flag is a GNU extension that
   # prevents xargs from running if there are no input files.
   if IFS= read -r -d $'\n' path; then
-    { echo "$path"; cat; } | xargs $@
+    echo "$path" | cat - | xargs "$@"
   fi
 }
 git diff --name-only --cached --relative | grep '\.jsx\?$' | sed 's/[^[:alnum:]]/\\&/g' | xargs-r -E '' -t standard
@@ -483,7 +478,7 @@ npm install snazzy
 E rode:
 
 ```bash
-$ standard --verbose | snazzy
+$ standard | snazzy
 ```
 
 Há também [standard-tap](https://www.npmjs.com/package/standard-tap),
@@ -493,24 +488,32 @@ Há também [standard-tap](https://www.npmjs.com/package/standard-tap),
 
 ## Node.js API
 
-### `standard.lintText(text, [opts], callback)`
+### `async standard.lintText(text, [opts])`
 
 Aplica lint no código fornecido `text` para forçar JavaScript Standard Style. Um objeto `opts` pode ser fornecido:
 
 ```js
-var opts = {
-  fix: false,   // automaticamente corrige problemas
-  globals: [],  // declaração de variáveis globais
-  plugins: [],  // plugins eslint
-  envs: [],     // ambiente eslint
-  parser: ''    // js parser (e.g. babel-eslint)
+{
+  // unique to lintText
+  filename: '',         // path of file containing the text being linted
+
+  // common to lintText and lintFiles
+  cwd: '',              // current working directory (default: process.cwd())
+  fix: false,           // automatically fix problems
+  extensions: [],       // file extensions to lint (has sane defaults)
+  globals: [],          // custom global variables to declare
+  plugins: [],          // custom eslint plugins
+  envs: [],             // custom eslint environment
+  parser: '',           // custom js parser (e.g. babel-eslint)
+  usePackageJson: true, // use options from nearest package.json?
+  useGitIgnore: true    // use file ignore patterns from .gitignore?
 }
 ```
 
-O `callback` vai ser chamado com os objetos `Error` e `results`:
+Objetos `results`:
 
 ```js
-var results = {
+const results = {
   results: [
     {
       filePath: '',
@@ -518,7 +521,8 @@ var results = {
         { ruleId: '', message: '', line: 0, column: 0 }
       ],
       errorCount: 0,
-      warningCount: 0
+      warningCount: 0,
+      output: '' // fixed source code (only present with {fix: true} option)
     }
   ],
   errorCount: 0,
@@ -526,23 +530,27 @@ var results = {
 }
 ```
 
-### `standard.lintFiles(files, [opts], callback)`
+### `async standard.lintFiles(files, [opts])`
 
 Aplica lint nos globs `files`. Um objeto `opts` pode ser passado
 
 ```js
-var opts = {
-  ignore: [],   // globs de arquivo para ser ignorados (has sane defaults)
-  cwd: '',      // diretório atual de trabalho (default: process.cwd())
-  fix: false,   // corrige problemas automaticamente
-  globals: [],  // variáveis globais para declarar
-  plugins: [],  // plugins eslint
-  envs: [],     // ambiente eslint
-  parser: ''    // js parser (e.g. babel-eslint)
+{
+  // unique to lintFiles
+  ignore: [],           // file globs to ignore (has sane defaults)
+
+  // common to lintText and lintFiles
+  cwd: '',              // current working directory (default: process.cwd())
+  fix: false,           // automatically fix problems
+  extensions: [],       // file extensions to lint (has sane defaults)
+  globals: [],          // custom global variables to declare
+  plugins: [],          // custom eslint plugins
+  envs: [],             // custom eslint environment
+  parser: '',           // custom js parser (e.g. babel-eslint)
+  usePackageJson: true, // use options from nearest package.json?
+  useGitIgnore: true    // use file ignore patterns from .gitignore?
 }
 ```
-
-O `callback` vai ser chamado com os objetos `Error` e `results`:
 
 ## Contribuições
 
@@ -567,6 +575,6 @@ Há vários **[plugins de editores](#text-editor-plugins)**, uma lista de
 e uma awesome list de
 **[packages do ecossistema `standard` ](https://github.com/standard/awesome-standard)**.
 
-## License
+## Licença
 
 [MIT](LICENSE). Copyright (c) [Feross Aboukhadijeh](http://feross.org).

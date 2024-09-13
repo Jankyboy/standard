@@ -6,20 +6,23 @@
  * VERSION BUMP.)
  */
 
-const crossSpawn = require('cross-spawn')
-const fs = require('fs')
-const minimist = require('minimist')
-const mkdirp = require('mkdirp')
-const os = require('os')
-const parallelLimit = require('run-parallel-limit')
-const path = require('path')
-const standardPackages = require('standard-packages')
-const test = require('tape')
+import { cpus } from 'node:os'
+import { fileURLToPath } from 'node:url'
+import { readFileSync, mkdirSync, access, R_OK, W_OK, writeFileSync } from 'node:fs'
+import crossSpawn from 'cross-spawn'
+import minimist from 'minimist'
+import parallelLimit from 'run-parallel-limit'
+import test from 'tape'
+
+const testJsonPath = new URL('test.json', import.meta.url)
+const json = readFileSync(testJsonPath, 'utf8')
+const testPkgs = JSON.parse(json)
 
 const GIT = 'git'
-const STANDARD = path.join(__dirname, '..', 'bin', 'cmd.js')
-const TMP = path.join(__dirname, '..', 'tmp')
-const PARALLEL_LIMIT = Math.ceil(os.cpus().length / 2)
+const NPM = 'npm'
+const STANDARD = fileURLToPath(new URL('../../bin/cmd.cjs', import.meta.url))
+const TMP = new URL('../../tmp/', import.meta.url)
+const PARALLEL_LIMIT = Math.ceil(cpus().length / 2)
 
 const argv = minimist(process.argv.slice(2), {
   boolean: [
@@ -27,25 +30,30 @@ const argv = minimist(process.argv.slice(2), {
     'offline',
     'quick',
     'quiet',
-    'fix'
+    'fix',
+    'write'
   ]
 })
 
-let testPackages = argv.quick
-  ? standardPackages.test.slice(0, 20)
-  : standardPackages.test
+let pkgs = testPkgs
 
-const disabledPackages = []
-testPackages = testPackages.filter(pkg => {
-  if (pkg.disable) disabledPackages.push(pkg)
+const disabledPkgs = []
+pkgs = pkgs.filter(pkg => {
+  if (pkg.disable) disabledPkgs.push(pkg)
   return !pkg.disable
 })
 
 if (argv.disabled) {
-  testPackages = disabledPackages
-} else {
+  pkgs = disabledPkgs
+}
+
+pkgs = argv.quick
+  ? pkgs.slice(0, 20)
+  : pkgs
+
+if (!argv.disabled) {
   test('Disabled Packages', t => {
-    disabledPackages.forEach(pkg => {
+    disabledPkgs.forEach(pkg => {
       console.log(`DISABLED: ${pkg.name}: ${pkg.disable} (${pkg.repo})`)
     })
     t.end()
@@ -53,16 +61,16 @@ if (argv.disabled) {
 }
 
 test('test github repos that use `standard`', t => {
-  t.plan(testPackages.length)
+  t.plan(pkgs.length)
 
-  mkdirp.sync(TMP)
+  mkdirSync(TMP, { recursive: true })
 
-  parallelLimit(testPackages.map(pkg => {
+  parallelLimit(pkgs.map(pkg => {
     const name = pkg.name
     const url = `${pkg.repo}.git`
-    const folder = path.join(TMP, name)
+    const folder = fileURLToPath(new URL(name, TMP))
     return cb => {
-      fs.access(path.join(TMP, name), fs.R_OK | fs.W_OK, err => {
+      access(folder, R_OK | W_OK, err => {
         if (argv.offline && err) {
           t.pass(`SKIPPING (offline): ${name} (${pkg.repo})`)
           cb(null)
@@ -72,12 +80,19 @@ test('test github repos that use `standard`', t => {
           const downloadPackage = err ? gitClone : gitPull
           downloadPackage(err => {
             if (err) return cb(err)
-            runStandard(cb)
+            if (pkg.install) {
+              npmInstall(err => {
+                if (err) return cb(err)
+                runStandard(cb)
+              })
+            } else {
+              runStandard(cb)
+            }
           })
         }
 
         function gitClone (cb) {
-          const args = ['clone', '--depth', 1, url, path.join(TMP, name)]
+          const args = ['clone', '--depth', 1, url, folder]
           spawn(GIT, args, { stdio: 'ignore' }, err => {
             if (err) err.message += ` (git clone) (${name})`
             cb(err)
@@ -92,6 +107,14 @@ test('test github repos that use `standard`', t => {
           })
         }
 
+        function npmInstall (cb) {
+          const args = ['install']
+          spawn(NPM, args, { cwd: folder, stdio: 'ignore' }, err => {
+            if (err) err.message += ` (npm install) (${name})`
+            cb(err)
+          })
+        }
+
         function runStandard (cb) {
           const args = [STANDARD, '--verbose']
           if (pkg.args) args.push(...pkg.args)
@@ -101,9 +124,11 @@ test('test github repos that use `standard`', t => {
               t.comment(`Attempting --fix on ${str}`)
               runStandardFix(cb)
             } else if (err) {
+              markDisabled(name, true)
               t.fail(str)
               cb(null)
             } else {
+              markDisabled(name, false)
               t.pass(str)
               cb(null)
             }
@@ -128,10 +153,25 @@ test('test github repos that use `standard`', t => {
             cb(err)
           })
         }
+
+        function markDisabled (name, disabled) {
+          const pkg = testPkgs.find(pkg => pkg.name === name)
+          if (disabled) {
+            pkg.disable = disabled
+          } else {
+            delete pkg.disable
+          }
+        }
       })
     }
   }), PARALLEL_LIMIT, err => {
     if (err) throw err
+    if (argv.write) {
+      writeFileSync(
+        testJsonPath,
+        JSON.stringify(testPkgs, null, 2)
+      )
+    }
   })
 })
 

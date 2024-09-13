@@ -13,10 +13,15 @@
   <a href="https://www.npmjs.com/package/standard"><img src="https://img.shields.io/npm/v/standard.svg" alt="npm version"></a>
 </p>
 
+<h5 align="center">
+  Sponsored by&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://socket.dev"><img src="https://cdn.rawgit.com/standard/standard/master/docs/logos/socket.png" alt="Socket – Supply Chain Dependency Security for JavaScript and npm" height=50 valign="middle"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://wormhole.app/?utm_medium=sponsorship&utm_source=standard&utm_campaign=feross"><img src="https://cdn.rawgit.com/standard/standard/master/docs/logos/wormhole.png" alt="Wormhole" height=50 valign="middle"></a>
+</h5>
+
 <p align="center">
   <a href="/docs/README-en.md">English</a> •
   <a href="/docs/README-esla.md">Español (Latinoamérica)</a> •
   <a href="/docs/README-fr.md">Français</a> •
+  <a href="/docs/README-id.md">Bahasa Indonesia</a> •
   <a href="/docs/README-iteu.md">Italiano (Italian)</a> •
   <a href="/docs/README-ja.md">日本語 (Japanese)</a> •
   <a href="/docs/README-kokr.md">한국어 (Korean)</a> •
@@ -24,8 +29,6 @@
   <a href="/docs/README-zhcn.md">简体中文 (Simplified Chinese)</a> •
   <a href="/docs/README-zhtw.md">繁體中文 (Taiwanese Mandarin)</a>
 </p>
-
-<br>
 
 什麼都不用想。不用管理 `.eslintrc` 、 `.jshintrc` 或 `.jscsrc` 等檔案。就是這麼容易。
 
@@ -58,7 +61,7 @@ npm install standard --save-dev
 - **還有 [更多更多的好處][5]** － *今天就來試試 `standard` 吧！*
 
 [1]: http://blog.izs.me/post/2353458699/an-open-letter-to-javascript-leaders-regarding
-[2]: http://inimino.org/~inimino/blog/javascript_semicolons
+[2]: https://web.archive.org/web/20201206065632/http://inimino.org/~inimino/blog/javascript_semicolons
 [3]: https://www.youtube.com/watch?v=gsfbh17Ax9I
 [4]: RULES-zhtw.md#semicolons
 [5]: RULES-zhtw.md#javascript-standard-style
@@ -205,7 +208,7 @@ JavaScript Standard Style 的美來自於它的簡單，沒有人想要在每個
 |---|---|---|---|
 
 
-| Your logo here | Your logo here | Your logo here | Your logo here |
+| [<img width=190 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/jublia.png>](https://jublia.com/) | Your logo here | Your logo here | Your logo here |
 |---|---|---|---|
 
 
@@ -242,13 +245,13 @@ JavaScript Standard Style 的美來自於它的簡單，沒有人想要在每個
 
 ### Visual Studio Code
 
-安裝 **[vscode-standardjs][vscode-1]**. (包含自動修改樣式的支援。)
+安裝 **[vscode-standard][vscode-1]**. (包含自動修改樣式的支援。)
 
 需要 JS 自動補完，可以安裝： **[vscode-standardjs-snippets][vscode-2]**。 需要 React 自動補完，可以安裝： **[vscode-react-standard][vscode-3]**。
 
-[vscode-1]: https://marketplace.visualstudio.com/items/chenxsan.vscode-standardjs
+[vscode-1]: https://marketplace.visualstudio.com/items?itemName=standard.vscode-standard
 [vscode-2]: https://marketplace.visualstudio.com/items?itemName=capaj.vscode-standardjs-snippets
-[vscode-3]: https://marketplace.visualstudio.com/items/TimonVS.ReactSnippetsStandard
+[vscode-3]: https://marketplace.visualstudio.com/items?itemName=TimonVS.ReactSnippetsStandard
 
 ### Vim
 
@@ -286,7 +289,7 @@ WebStorm [近期發佈了原生支援](https://blog.jetbrains.com/webstorm/2017/
 
 如果你還是傾向要手動設定 `standard`，[可以參考這個教學][webstorm-1]。這可以套用至所有 JetBrains 的產品，包括 PhpStorm、IntelliJ、RubyMine 等等。
 
-[webstorm-1]: docs/webstorm.md
+[webstorm-1]: webstorm.md
 
 ## 有 README 專用的 standard 徽章嗎？
 
@@ -360,14 +363,6 @@ automatically fix some problems`" 。
 
 JavaScript Standard Style 底層是使用 [ESLint](http://eslint.org/)，所以你可以直接使用 ESLint 的語法隱藏。
 
-為了拿到詳細的輸出（讓你知道特定規則的名稱好去忽略），可以執行：
-
-```bash
-$ standard --verbose
-Error: Use JavaScript Standard Style
-  routes/error.js:20:36: 'file' was used before it was defined. (no-use-before-define)
-```
-
 在特定行數忽略 **所有規則**：
 
 ```js
@@ -424,10 +419,10 @@ $ standard --global myVar1 --global myVar2
 
 為了支援實驗性質的語法，`standard` 支援客製化 JavaScript 語法解析器。在使用客製化語法解析器前，請考慮清楚是否值得去增加這些複雜度。
 
-要使用客製化語法解析器，可以從 npm 安裝（比如說：`npm install babel-eslint`），然後執行：
+要使用客製化語法解析器，可以從 npm 安裝（比如說：`npm install @babel/eslint-parser`），然後執行：
 
 ```bash
-$ standard --parser babel-eslint
+$ standard --parser @babel/eslint-parser
 ```
 
 或在 `package.json` 中加入：
@@ -435,12 +430,12 @@ $ standard --parser babel-eslint
 ```json
 {
   "standard": {
-    "parser": "babel-eslint"
+    "parser": "@babel/eslint-parser"
   }
 }
 ```
 
-如果你是把 `standard` 裝在全域下（就是 `npm install standard --global`），那麼請確保 `babel-eslint` 也是用 `npm install babel-eslint --global` 裝在全域下。
+如果你是把 `standard` 裝在全域下（就是 `npm install standard --global`），那麼請確保 `@babel/eslint-parser` 也是用 `npm install @babel/eslint-parser --global` 裝在全域下。
 
 ## 我可以使用 JavaScript 的變體，像是 Flow 嗎？
 
@@ -536,7 +531,7 @@ function xargs-r() {
   # Portable version of "xargs -r". The -r flag is a GNU extension that
   # prevents xargs from running if there are no input files.
   if IFS= read -r -d $'\n' path; then
-    { echo "$path"; cat; } | xargs $@
+    echo "$path" | cat - | xargs "$@"
   fi
 }
 git diff --name-only --cached --relative | grep '\.jsx\?$' | sed 's/[^[:alnum:]]/\\&/g' | xargs-r -E '' -t standard
@@ -557,7 +552,7 @@ $ npm install snazzy
 然後執行：
 
 ```bash
-$ standard --verbose | snazzy
+$ standard | snazzy
 ```
 
 也可以使用 [standard-tap](https://www.npmjs.com/package/standard-tap)、[standard-json](https://www.npmjs.com/package/standard-json)、[standard-reporter](https://www.npmjs.com/package/standard-reporter) 和 [standard-summary](https://www.npmjs.com/package/standard-summary)。
@@ -566,24 +561,32 @@ $ standard --verbose | snazzy
 
 有！
 
-### `standard.lintText(text, [opts], callback)`
+### `async standard.lintText(text, [opts])`
 
 把輸入的 `text` 檢查 JavaScript Standard Style，可加入 `opts` 選項。
 
 ```js
-var opts = {
-  fix: false,   // 自動修正問題
-  globals: [],  // 會用到的全域變數
-  plugins: [],  // eslint 外掛
-  envs: [],     // eslint 環境
-  parser: ''    // javascript 語法解析器 （比如說 babel-eslint）
+{
+  // unique to lintText
+  filename: '',         // path of file containing the text being linted
+
+  // common to lintText and lintFiles
+  cwd: '',              // current working directory (default: process.cwd())
+  fix: false,           // automatically fix problems
+  extensions: [],       // file extensions to lint (has sane defaults)
+  globals: [],          // custom global variables to declare
+  plugins: [],          // custom eslint plugins
+  envs: [],             // custom eslint environment
+  parser: '',           // custom js parser (e.g. babel-eslint)
+  usePackageJson: true, // use options from nearest package.json?
+  useGitIgnore: true    // use file ignore patterns from .gitignore?
 }
 ```
 
-`callback` 會被執行，並給予 `Error` 和 `results` 參數：
+`results` 參數：
 
 ```js
-var results = {
+const results = {
   results: [
     {
       filePath: '',
@@ -591,7 +594,8 @@ var results = {
         { ruleId: '', message: '', line: 0, column: 0 }
       ],
       errorCount: 0,
-      warningCount: 0
+      warningCount: 0,
+      output: '' // fixed source code (only present with {fix: true} option)
     }
   ],
   errorCount: 0,
@@ -599,23 +603,29 @@ var results = {
 }
 ```
 
-### `standard.lintFiles(files, [opts], callback)`
+### `async standard.lintFiles(files, [opts])`
 
 把輸入的 `files` 檢查 JavaScript Standard Style，可加入 `opts` 選項。
 
 ```js
-var opts = {
-  ignore: [],   // 需要忽略的檔案（有跟原本相同的預設值）
-  cwd: '',      // 當前目錄（預設：process.cwd()）
-  fix: false,   // 自動修正問題
-  globals: [],  // 會用到的全域變數
-  plugins: [],  // eslint 外掛
-  envs: [],     // eslint 環境
-  parser: ''    // javascript 語法解析器 （比如說 babel-eslint）
+{
+  // unique to lintFiles
+  ignore: [],           // file globs to ignore (has sane defaults)
+
+  // common to lintText and lintFiles
+  cwd: '',              // current working directory (default: process.cwd())
+  fix: false,           // automatically fix problems
+  extensions: [],       // file extensions to lint (has sane defaults)
+  globals: [],          // custom global variables to declare
+  plugins: [],          // custom eslint plugins
+  envs: [],             // custom eslint environment
+  parser: '',           // custom js parser (e.g. babel-eslint)
+  usePackageJson: true, // use options from nearest package.json?
+  useGitIgnore: true    // use file ignore patterns from .gitignore?
 }
 ```
 
-`callback` 會被執行，並給予 `Error` 和 `results` 參數（和上面相同）。
+`results` 參數（和上面相同）。
 
 ## 如何貢獻 `standard`？
 
@@ -635,8 +645,8 @@ var opts = {
 - **[standard-www](https://github.com/standard/standard-www)** - https://standardjs.com 網站程式
 - **[semistandard](https://github.com/standard/semistandard)** - standard，含分號版本（如果你真的真的必須要加分號）
 
-也有非常多的 **[編輯器外掛](#text-editor-plugins)**、
-**[有使用 `standard` 的 npm 套件清單](https://github.com/standard/standard-packages)**和 **[`standard` 生態系的清單](https://github.com/standard/awesome-standard)**。
+也有非常多的 **[編輯器外掛](#有文字編輯器的外掛嗎)**、
+**[有使用 `standard` 的 npm 套件清單](https://github.com/standard/standard-packages)** 和 **[`standard` 生態系的清單](https://github.com/standard/awesome-standard)**。
 
 ## 授權
 
